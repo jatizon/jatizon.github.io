@@ -30,7 +30,7 @@ export const site = {
    * Drop a photo in `public/` and point this at it (e.g. "/photo.jpg").
    * While it is null the hero shows a monogram instead.
    */
-  photo: "/photo.png" as string | null,
+  photo: "/photo.webp" as string | null,
 
   cv: {
     // One PDF per language — a real translation, not the same file relabeled.

@@ -7,6 +7,7 @@ import { useLanguage } from "./useLanguage";
  * instead, right next to the English version it's a translation of.
  */
 const strings = {
+  skipToContent: { en: "Skip to content", pt: "Pular para o conteúdo" },
   navProjects: { en: "Projects", pt: "Projetos" },
   navExperience: { en: "Experience", pt: "Experiência" },
   navEducation: { en: "Education", pt: "Educação" },
@@ -42,9 +43,13 @@ const strings = {
 
   experienceHeading: { en: "Experience", pt: "Experiência" },
 
-  languageToggleAria: {
-    en: "Switch to Portuguese",
-    pt: "Switch to English",
+  // The group's own name (not an action) — it contains two buttons, each
+  // labeled with the language it switches to (see LanguageToggle.tsx).
+  languageGroupLabel: { en: "Language", pt: "Idioma" },
+
+  projectsScrollableAria: {
+    en: "Projects (scrollable)",
+    pt: "Projetos (com rolagem)",
   },
 } satisfies Record<string, { en: string; pt: string }>;
 
