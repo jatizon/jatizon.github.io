@@ -14,6 +14,22 @@ npm run preview  # serve the production build
 npm run lint
 ```
 
+## Deployment
+
+Live at **https://josetizon.com** — `jatizon.github.io` (the repo's default
+Pages address) just 301-redirects there; that's GitHub Pages' own behavior
+once a custom domain is configured, not something this project sets up
+itself.
+
+`.github/workflows/deploy.yml` builds and publishes on every push to `main`
+via GitHub Actions (Settings → Pages → Source must be "GitHub Actions", not
+"Deploy from a branch" — the latter serves the raw, un-built source).
+
+`public/CNAME` (containing `josetizon.com`) has to ship inside `dist/` on
+every deploy — GitHub Pages reads it from the published output itself, not
+just from a one-time Settings field, so deleting this file would silently
+break the custom domain on the next deploy.
+
 ## Editing content
 
 Everything editable lives in [`src/config/site.ts`](src/config/site.ts):
@@ -86,9 +102,8 @@ data collected, and it skips counting automatically when the visitor's
 browser sends `Do Not Track` or when running on `localhost`. No backend of
 our own is involved; it's a single `<script>` tag in `index.html`.
 
-**One manual step needed to activate it**: create a free site at
-goatcounter.com and swap `REPLACE-WITH-YOUR-CODE` in `index.html` for the
-code you chose. Stats then live at `https://<that code>.goatcounter.com`.
+Already wired to José's site: `josetizon.goatcounter.com`. Stats live at
+[josetizon.goatcounter.com](https://josetizon.goatcounter.com).
 
 ## Layout notes
 

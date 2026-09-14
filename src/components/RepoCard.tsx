@@ -98,7 +98,7 @@ export function RepoCardSkeleton() {
       aria-hidden="true"
       className="h-40 animate-pulse rounded-xl border border-stone-800 bg-stone-900 p-5"
     >
-      <div className="h-4 w-1/2 rounded bg-stone-200" />
+      <div className="h-4 w-1/2 rounded bg-stone-800" />
       <div className="mt-4 h-3 w-full rounded bg-stone-800" />
       <div className="mt-2 h-3 w-5/6 rounded bg-stone-800" />
       <div className="mt-2 h-3 w-2/3 rounded bg-stone-800" />

@@ -11,19 +11,43 @@
     />
     <meta name="theme-color" content="#0c0a09" />
     <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://josetizon.com/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jatizon.github.io/" />
+    <meta property="og:url" content="https://josetizon.com/" />
     <meta property="og:title" content="José Alberto Tizon" />
     <meta
       property="og:description"
       content="Computer Engineering student at ITA · automation and backend engineering."
     />
     <!-- Absolute URL: LinkedIn/Twitter crawlers won't resolve a relative og:image. -->
-    <meta property="og:image" content="https://jatizon.github.io/og.png" />
+    <meta property="og:image" content="https://josetizon.com/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <script>
+      // Sets <html lang> before first paint, matching whatever language the
+      // page will actually render in (LanguageProvider does the same
+      // detection on mount, but that's after React has already rendered
+      // once with the "en" fallback below — this avoids that flash for
+      // assistive tech and for anyone viewing source/View Page Source).
+      (function () {
+        try {
+          var stored = localStorage.getItem("lang");
+          var lang =
+            stored === "en" || stored === "pt"
+              ? stored
+              : navigator.language.toLowerCase().indexOf("pt") === 0
+                ? "pt"
+                : "en";
+          document.documentElement.lang = lang;
+        } catch (e) {
+          // localStorage unavailable (private mode) — the "en" attribute
+          // above stays, same fallback LanguageProvider would pick.
+        }
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

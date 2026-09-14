@@ -43,6 +43,8 @@ export function CvPanel() {
             width={680}
             height={880}
             alt={t("cvFirstPageAlt")}
+            loading="lazy"
+            decoding="async"
             className="block w-full bg-white transition group-hover:scale-[1.02]"
           />
           <span className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/80 to-transparent p-3 text-xs font-medium text-white opacity-0 transition group-hover:opacity-100">
@@ -53,7 +55,7 @@ export function CvPanel() {
         <a
           href={cvFile}
           download
-          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-accent-soft hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-accent-cta-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           <DownloadIcon className="h-4 w-4" />
           {t("cvDownload")}

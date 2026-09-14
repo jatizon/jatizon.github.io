@@ -76,10 +76,18 @@ function writeCache(repos: Repo[]): void {
   }
 }
 
+interface NamedGitHubRepo extends GitHubRepo {
+  name: string;
+}
+
 /**
- * Fetches metadata for the repos listed in `site.repos`, one request each.
- * The unauthenticated API allows 60 requests/hour per IP, so every failure
- * falls back to the config entry instead of surfacing an error.
+ * Fetches metadata for the repos listed in `site.repos` — a single request
+ * for the account's public repos, matched back to our list by name. (One
+ * call instead of one-per-repo: the unauthenticated API allows only 60
+ * requests/hour per IP, shared by everyone behind the same NAT, and this
+ * page only ever needs the handful of repos already in `site.repos`.) A repo
+ * missing from that single response — or the request failing outright —
+ * falls back to the cache, then the config entry, instead of an error.
  */
 export function useRepos() {
   const [cached] = useState(readCache);
@@ -94,25 +102,27 @@ export function useRepos() {
     const controller = new AbortController();
 
     async function load() {
-      const results = await Promise.allSettled(
-        site.repos.map(async (config) => {
-          const response = await fetch(
-            `https://api.github.com/repos/${site.githubUser}/${config.slug}`,
-            { signal: controller.signal, headers: { Accept: "application/vnd.github+json" } },
-          );
-          if (!response.ok) throw new Error(`GitHub responded ${response.status}`);
-          return mergeRepo(config, (await response.json()) as GitHubRepo);
-        }),
-      );
+      let byName: Map<string, NamedGitHubRepo> | null = null;
+      try {
+        const response = await fetch(
+          `https://api.github.com/users/${site.githubUser}/repos?per_page=100&type=public`,
+          { signal: controller.signal, headers: { Accept: "application/vnd.github+json" } },
+        );
+        if (!response.ok) throw new Error(`GitHub responded ${response.status}`);
+        const list = (await response.json()) as NamedGitHubRepo[];
+        byName = new Map(list.map((repo) => [repo.name, repo]));
+      } catch {
+        if (controller.signal.aborted) return;
+        byName = null; // Whole request failed — every repo falls back below.
+      }
 
-      if (controller.signal.aborted) return;
-
-      const merged = results.map((result, index) =>
-        result.status === "fulfilled"
-          ? result.value
-          : (cached?.[index] ?? fallbackRepo(site.repos[index])),
-      );
-      const failed = results.some((result) => result.status === "rejected");
+      const merged = site.repos.map((config, index) => {
+        const data = byName?.get(config.slug);
+        return data ? mergeRepo(config, data) : (cached?.[index] ?? fallbackRepo(config));
+      });
+      // Degraded when the request itself failed, or it succeeded but didn't
+      // list one of our repos (private, renamed, or beyond the 100-repo page).
+      const failed = byName === null || site.repos.some((config) => !byName!.has(config.slug));
 
       setRepos(merged);
       setDegraded(failed);

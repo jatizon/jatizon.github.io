@@ -118,6 +118,8 @@ export function Hero() {
               alt={site.name}
               width={192}
               height={192}
+              // The likely LCP element — loads eagerly and jumps the queue.
+              fetchPriority="high"
               className="h-32 w-32 shrink-0 rounded-full object-cover shadow-lg ring-4 ring-stone-900 sm:h-40 sm:w-40 lg:h-48 lg:w-48"
             />
           ) : (
@@ -140,7 +142,7 @@ export function Hero() {
               <a
                 href={site.cv.files[lang]}
                 download
-                className="flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-accent-soft hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-accent-cta-hover hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 <DownloadIcon className="h-4 w-4" />
                 {t("downloadCv")}
