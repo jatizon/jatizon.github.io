@@ -195,12 +195,9 @@ export const site = {
       fallbackDescription:
         "Chess game with a graphical interface built using SFML in C++ (2023).",
     },
-    // Pinned on GitHub but the repository is still empty, so it is hidden here.
-    // Uncomment once it has code (and write a description — GitHub has none).
-    // {
-    //   slug: "c-minus-compiler",
-    //   title: "C- Compiler",
-    //   description: "...",
-    // },
+    {
+      slug: "c-minus-compiler",
+      title: "C- Compiler",
+    },
   ] satisfies RepoConfig[],
 } as const;
