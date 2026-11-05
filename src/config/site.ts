@@ -197,7 +197,7 @@ export const site = {
     },
     {
       slug: "c-minus-compiler",
-      title: "C- Compiler",
+      title: "c-minus-compiler",
     },
   ] satisfies RepoConfig[],
 } as const;
