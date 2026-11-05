@@ -5,7 +5,7 @@ import { RepoCard, RepoCardSkeleton } from "./RepoCard";
 import { Section } from "./Section";
 
 export function Portfolio() {
-  const { repos, loading, degraded } = useRepos();
+  const { repos, loading } = useRepos();
   const t = useT();
 
   return (
@@ -23,9 +23,7 @@ export function Portfolio() {
         </a>
       }
     >
-      {degraded && <p className="mt-3 text-xs text-stone-400">{t("reposDegraded")}</p>}
-
-      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+      <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {loading
           ? site.repos.map((repo) => <RepoCardSkeleton key={repo.slug} />)
           : repos.map((repo) => <RepoCard key={repo.slug} repo={repo} />)}

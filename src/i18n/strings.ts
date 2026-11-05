@@ -35,10 +35,6 @@ const strings = {
 
   projectsHeading: { en: "Projects", pt: "Projetos" },
   allRepositories: { en: "All repositories", pt: "Todos os repositórios" },
-  reposDegraded: {
-    en: "Live GitHub data is unavailable right now, so stars and topics may be missing.",
-    pt: "Os dados ao vivo do GitHub estão indisponíveis no momento, então estrelas e tópicos podem estar faltando.",
-  },
   liveBadge: { en: "Live", pt: "Ao vivo" },
 
   experienceHeading: { en: "Experience", pt: "Experiência" },
@@ -46,11 +42,6 @@ const strings = {
   // The group's own name (not an action) — it contains two buttons, each
   // labeled with the language it switches to (see LanguageToggle.tsx).
   languageGroupLabel: { en: "Language", pt: "Idioma" },
-
-  projectsScrollableAria: {
-    en: "Projects (scrollable)",
-    pt: "Projetos (com rolagem)",
-  },
 } satisfies Record<string, { en: string; pt: string }>;
 
 type StringKey = keyof typeof strings;

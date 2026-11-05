@@ -20,9 +20,9 @@ export function RepoCard({ repo }: { repo: Repo }) {
   const t = useT();
 
   return (
-    <article className="group relative flex h-full flex-col rounded-xl border border-stone-800 bg-stone-900 p-5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-lg">
+    <article className="group relative flex h-full flex-col border border-stone-800 bg-stone-900 p-5 transition hover:border-accent/40">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-display font-semibold tracking-tight transition group-hover:text-accent-soft">
+        <h3 className="font-display font-semibold transition group-hover:text-accent-soft">
           {/* Stretched link: the whole card is clickable, but only one link is focusable. */}
           <a
             href={repo.url}
@@ -41,10 +41,10 @@ export function RepoCard({ repo }: { repo: Repo }) {
             href={repo.homepage}
             target="_blank"
             rel="noreferrer noopener"
-            className="relative z-10 flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-800 bg-emerald-950/60 px-2 py-0.5 text-xs font-medium text-emerald-400 transition hover:border-emerald-600 hover:text-emerald-300"
+            className="relative z-10 flex shrink-0 items-center gap-1 text-xs font-medium text-stone-400 underline underline-offset-4 transition hover:text-accent-soft"
           >
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             {t("liveBadge")}
+            <ExternalLinkIcon className="h-3 w-3" />
           </a>
         ) : (
           <ExternalLinkIcon className="h-4 w-4 shrink-0 text-stone-500 transition group-hover:text-accent-soft" />
@@ -58,16 +58,9 @@ export function RepoCard({ repo }: { repo: Repo }) {
       )}
 
       {repo.topics && (
-        <ul className="mt-3 flex flex-wrap gap-1.5">
-          {repo.topics.slice(0, 4).map((topic) => (
-            <li
-              key={topic}
-              className="rounded-full bg-stone-800 px-2 py-0.5 text-xs text-stone-400"
-            >
-              {topic}
-            </li>
-          ))}
-        </ul>
+        <p className="mt-3 text-xs text-stone-500">
+          {repo.topics.slice(0, 4).join(" · ")}
+        </p>
       )}
 
       <div className="mt-auto flex items-center gap-4 pt-4 text-xs text-stone-400">
@@ -96,12 +89,12 @@ export function RepoCardSkeleton() {
   return (
     <div
       aria-hidden="true"
-      className="h-40 animate-pulse rounded-xl border border-stone-800 bg-stone-900 p-5"
+      className="h-40 animate-pulse border border-stone-800 bg-stone-900 p-5"
     >
-      <div className="h-4 w-1/2 rounded bg-stone-800" />
-      <div className="mt-4 h-3 w-full rounded bg-stone-800" />
-      <div className="mt-2 h-3 w-5/6 rounded bg-stone-800" />
-      <div className="mt-2 h-3 w-2/3 rounded bg-stone-800" />
+      <div className="h-4 w-1/2 bg-stone-800" />
+      <div className="mt-4 h-3 w-full bg-stone-800" />
+      <div className="mt-2 h-3 w-5/6 bg-stone-800" />
+      <div className="mt-2 h-3 w-2/3 bg-stone-800" />
     </div>
   );
 }

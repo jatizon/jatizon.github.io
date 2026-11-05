@@ -96,7 +96,6 @@ export function useRepos() {
   );
   // With a warm cache there is nothing to wait for — skip the skeletons.
   const [loading, setLoading] = useState(cached === null);
-  const [degraded, setDegraded] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -125,7 +124,6 @@ export function useRepos() {
       const failed = byName === null || site.repos.some((config) => !byName!.has(config.slug));
 
       setRepos(merged);
-      setDegraded(failed);
       setLoading(false);
       if (!failed) writeCache(merged);
     }
@@ -134,5 +132,5 @@ export function useRepos() {
     return () => controller.abort();
   }, [cached]);
 
-  return { repos, loading, degraded };
+  return { repos, loading };
 }

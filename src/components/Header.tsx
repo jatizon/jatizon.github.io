@@ -12,11 +12,11 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-20 border-b border-stone-800/80 bg-stone-950/80 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-stone-800 bg-ink">
       <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-4 px-4 lg:px-6 py-3">
         <a
           href="#top"
-          className="font-display truncate font-semibold tracking-tight hover:text-accent-soft"
+          className="font-display truncate font-semibold hover:text-accent-soft"
         >
           {site.name}
         </a>
